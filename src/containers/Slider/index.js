@@ -12,7 +12,8 @@ const Slider = () => {
     new Date(evtA.date) > new Date(evtB.date) ? -1 : 1
   );
   const nextCard = () => {
-    if(byDateDesc){
+    // ajout de la condition si tableau byDateDesc existe et et sup à 0 alors lancement du setTimeout
+    if(byDateDesc && byDateDesc.length > 0){
       setTimeout(
         // Ajout -1 pour gérer le bug du caroussel
         () => setIndex(index < byDateDesc.length - 1 ? index + 1 : 0),
@@ -26,10 +27,9 @@ const Slider = () => {
   return (
     <div className="SlideCardList">
       {byDateDesc?.map((event, idx) => (
-        <div>
+        // déplacement de la key dans une autre div qui englobe le composant slidecard
+        <div key={event.title}>
           <div
-          // changement event.title par id
-            key={event.id}
             className={`SlideCard SlideCard--${
               index === idx ? "display" : "hide"
             }`}
@@ -46,13 +46,16 @@ const Slider = () => {
           </div>
           <div className="SlideCard__paginationContainer">
             <div className="SlideCard__pagination">
-              {byDateDesc.map((_, radioIdx) => (
+              {/* remplacement undersocre par bullet (ici represenete chaque élément du tableau) comme variable pour utilisation dans key */}
+              {byDateDesc.map((bullet, radioIdx) => (
                 <input
-                  key={`${event.id}`}
+                  key={`${bullet.title}`}
                   type="radio"
                   name="radio-button"
                   // remplacement de idx par index pour résoudre les radiobutton
                   checked={index === radioIdx}
+                  // ajout readOnly suite à l'erreur de console erreur console 
+                  readOnly
                 />
               ))}
             </div>

@@ -14,11 +14,12 @@ import { useData } from "../../contexts/DataContext";
 
 const Page = () => {
   const {data} = useData();
-  // Dans la const last, on trie les events dans l'ordre du plus récent au plus ancien et 
-  // on indique que last est le premier élément du tableau soit [0]
+  // // Dans la const last, on trie les events dans l'ordre du plus récent au plus ancien et 
+  // // on indique que last est le premier élément du tableau soit [0]
   const last = data?.events.sort((evtA, evtB) =>
     new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
   )[0];
+  
   return <>
     <header>
       <Menu />
@@ -121,13 +122,15 @@ const Page = () => {
     <footer className="row">
       <div className="col presta">
         <h3>Notre derniére prestation</h3>
+        {/* Si data est null on affiche loading sinon on renvois le composant events card */}
+        {data === null ? ("loading") : (
         <EventCard
           imageSrc={last?.cover}
           title={last?.title}
           date={new Date(last?.date)}
           small
           label={last?.type}
-        />
+        />)}
       </div>
       <div className="col contact">
         <h3>Contactez-nous</h3>
