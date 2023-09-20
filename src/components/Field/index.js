@@ -17,6 +17,8 @@ const Field = ({ type = FIELD_TYPES.INPUT_TEXT, label, name, placeholder }) => {
           name={name}
           placeholder={placeholder}
           data-testid="field-testid"
+          // Ajout required pour empêcher les envois si formulaire n'est pas correctement remplis
+          required
         />
       );
       break;
