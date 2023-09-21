@@ -58,12 +58,12 @@ const Page = () => {
       </section>
       <section className="EventsContainer" id="nos-realisations">
         <h2 className="Title">Nos réalisations</h2>
-        <EventList />
+        <EventList data-testid="eventsList-test"  />
       </section>
       <section className="PeoplesContainer" id="notre-equipe">
         <h2 className="Title">Notre équipe</h2>
         <p>Une équipe d’experts dédiés à l’ogranisation de vos événements</p>
-        <div className="ListContainer">
+        <div className="ListContainer" data-testid="listTeamCard-test" >
           <PeopleCard
             imageSrc="/images/stephanie-liverani-Zz5LQe-VSMY-unsplash.png"
             name="Samira"
@@ -118,12 +118,13 @@ const Page = () => {
         </Modal>
       </div>
     </main>
-    <footer className="row">
+    <footer className="row" data-testid="footer-test">
       <div className="col presta">
         <h3>Notre derniére prestation</h3>
         {/* Si data est null on affiche loading sinon on renvois le composant events card */}
         {data === null ? ("loading") : (
         <EventCard
+        data-testid="lastEventCard-test"
           imageSrc={last?.cover}
           title={last?.title}
           date={new Date(last?.date)}
